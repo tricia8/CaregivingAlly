@@ -45,11 +45,7 @@ import { generatePrompt } from "../api/gemini";
 import { getResponses } from "../api/firestore";
 
 const prompt = ref("");
-const responses = ref([
-  {
-    text: "hello, everyone, i think one challenge is and one reward is that blah blah blah. Caregivers need lots of patience and care and love and sacrifice. It can be really tiring but also really fulfilling and makes you feel accomplished. I feel that connecting with the person we care for and getting appreciation is really great and makes it feel like you did it.",
-  },
-]);
+const responses = ref([]);
 const numCols = 4;
 const columns = ref(Array.from({ length: numCols }, () => []));
 const showResponseModal = ref(false);
@@ -72,7 +68,7 @@ async function fetchResponses() {
     const response = await getResponses();
     if (!response.ok) throw new Error("Failed to fetch responses");
     const data = await response.json();
-    responses.value = data.response;
+    responses.value = data.responses;
   } catch (error) {
     void error;
   }

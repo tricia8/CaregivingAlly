@@ -1,6 +1,8 @@
 export const getResponses = async () => {
   try {
-    const res = await fetch(`https://caregiving-ally.onrender.com/api/responses`);
+    const res = await fetch(
+      `https://caregivingally.onrender.com/api/responses`
+    );
 
     if (!res.ok) {
       throw new Error("Failed to fetch responses");
@@ -16,13 +18,16 @@ export const getResponses = async () => {
 
 export const submitResponse = async (response) => {
   try {
-    const res = await fetch(`api/response`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: response,
-    });
+    const res = await fetch(
+      `https://caregivingally.onrender.com/api/response`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ post: response }),
+      }
+    );
 
     if (!res.ok) {
       throw new Error("Failed to submit response");

@@ -127,7 +127,7 @@ router.get("/responses", async (req, res) => {
     const voicesRef = db.collection(`responses`);
     const snapshot = await voicesRef.get();
 
-    const voices = snapshot.docs.map((doc) => {
+    const responses = snapshot.docs.map((doc) => {
       const data = doc.data();
       return {
         id: doc.id,
@@ -137,8 +137,8 @@ router.get("/responses", async (req, res) => {
 
     return res.status(200).json({ responses });
   } catch (error) {
-    console.error("Error fetching friends:", error);
-    return res.status(500).json({ error: "Failed to fetch friends" });
+    console.error("Error fetching responses:", error);
+    return res.status(500).json({ error: "Failed to fetch responses" });
   }
 });
 

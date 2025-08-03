@@ -24,7 +24,7 @@ export async function generatePrompt() {
 
 export async function relevanceScore(query) {
   try {
-    const res = await fetch(`https://caregiving-ally.onrender.com/api/search?q=${encodeURIComponent(query)}`, {
+    const res = await fetch(`https://caregivingally.onrender.com/api/search?q=${encodeURIComponent(query)}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

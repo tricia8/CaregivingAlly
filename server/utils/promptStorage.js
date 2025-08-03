@@ -7,13 +7,13 @@ export async function getStoredPromptData() {
   if (doc.exists) {
     const data = doc.data();
     return {
-      prompt: data.prompt || null,
+      storedPrompt: data.storedPrompt || null,
       lastGenerated: data.lastGenerated || null,
     };
   }
 
   return {
-    prompt: null,
+    storedPrompt: null,
     lastGenerated: null,
   };
 }

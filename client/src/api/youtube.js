@@ -12,7 +12,7 @@ export async function getSearchResults(query) {
       q = `${q} caregiving caregivers caregiver support`;
     }
 
-    const res = await fetch(`https://caregivingally.onrender.com/api/search?q=${encodeURIComponent(q)}`);
+    const res = await fetch(`http://localhost:3000/api/search?q=${encodeURIComponent(q)}`);
 
     if (!res.ok) {
       const errMessage = await res.text();

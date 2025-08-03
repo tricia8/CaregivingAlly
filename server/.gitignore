@@ -8,3 +8,5 @@ node_modules/
 # env files
 .env
 .env.*
+
+caregivingally-firebase-adminsdk.json

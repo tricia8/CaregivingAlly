@@ -1,7 +1,7 @@
 export const getResponses = async () => {
   try {
     const res = await fetch(
-      `https://caregivingally.onrender.com/api/responses`
+      `http://localhost:3000/api/responses`
     );
 
     if (!res.ok) {
@@ -19,7 +19,7 @@ export const getResponses = async () => {
 export const submitResponse = async (response) => {
   try {
     const res = await fetch(
-      `https://caregivingally.onrender.com/api/response`,
+      `http://localhost:3000/api/response`,
       {
         method: "POST",
         headers: {

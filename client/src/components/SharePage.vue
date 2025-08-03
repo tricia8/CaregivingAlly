@@ -54,10 +54,8 @@ const selectedResponse = ref(null);
 
 async function fetchPrompt() {
   try {
-    const response = await generatePrompt();
-    if (!response.ok) throw new Error("Failed to fetch prompt");
-    const data = await response.json();
-    prompt.value = data.output;
+    const data = await generatePrompt();
+    prompt.value = data;
   } catch (error) {
     prompt.value = "Share some challenges and rewards of caregiving!";
   }
@@ -65,10 +63,12 @@ async function fetchPrompt() {
 
 async function fetchResponses() {
   try {
-    const response = await getResponses();
-    if (!response.ok) throw new Error("Failed to fetch responses");
-    const data = await response.json();
-    responses.value = data.responses;
+    const data = await getResponses();
+    responses.value = data;
+
+    responses.value.forEach((response, i) => {
+      columns.value[i % numCols].push(response);
+    });
   } catch (error) {
     void error;
   }
@@ -77,10 +77,6 @@ async function fetchResponses() {
 onMounted(() => {
   fetchPrompt();
   fetchResponses();
-
-  responses.value.forEach((response, i) => {
-    columns.value[i % numCols].push(response);
-  });
 });
 
 const openModal = (response) => {
@@ -108,7 +104,8 @@ const closeModal = () => {
   background: rgb(218, 175, 249);
   border-radius: 15px;
   z-index: 1;
-  margin-top: 6px;
+  text-align: center;
+  margin: 6px;
 }
 
 .story-column {
@@ -167,7 +164,8 @@ const closeModal = () => {
 
 .modal-content {
   background: rgb(255, 254, 217);
-  padding-inline: 16px;
+  padding-inline: 10px;
+  padding-block: 16px;
   border-radius: 12px;
   width: 50%;
   max-height: 80vh;
@@ -175,6 +173,10 @@ const closeModal = () => {
   overflow-wrap: break-word;
   white-space: normal;
   overflow-y: auto;
+}
+
+.modal-content > * {
+  margin-bottom: 0;
 }
 
 h2 {

@@ -131,7 +131,7 @@ router.get("/responses", async (req, res) => {
       const data = doc.data();
       return {
         id: doc.id,
-        username: data.response,
+        text: data.response,
       };
     });
 

@@ -15,10 +15,10 @@
 </template>
 
 <script setup>
-import { submitResponse } from '@/api/firestore';
-import { ref } from 'vue';
+import { submitResponse } from "@/api/firestore";
+import { ref } from "vue";
 
-const response = ref('');
+const response = ref("");
 
 const emit = defineEmits(["close"]);
 
@@ -27,7 +27,8 @@ function close() {
 }
 
 function share() {
-    submitResponse(response.value);
+  submitResponse(response.value);
+  emit("close");
 }
 </script>
 
@@ -56,7 +57,7 @@ function share() {
 
 .input {
   width: 100%;
-  height: 120px; 
+  height: 120px;
   padding: 10px;
   border-radius: 12px;
   font-size: medium;
@@ -64,15 +65,15 @@ function share() {
 }
 
 .button-wrapper {
-    display: flex;
-    flex-direction: row-reverse;
+  display: flex;
+  flex-direction: row-reverse;
 }
 
 .button {
-    padding-inline: 8px;
-    padding-block: 10px;
-    border-radius: 12px;
-    font-size: small;
-    cursor: pointer;
+  padding-inline: 8px;
+  padding-block: 10px;
+  border-radius: 12px;
+  font-size: small;
+  cursor: pointer;
 }
 </style>

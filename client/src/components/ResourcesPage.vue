@@ -1,26 +1,22 @@
 <template>
   <div class="resources-container">
     <h1>Resources</h1>
+
+    <div v-if="showModal" class="modal-overlay" @click="closeModal">
+      <div class="modal-content" @click.stop>
+        <button @click="prevImage" class="nav-button">◀</button>
+        <img :src="images[currentIndex]" class="modal-img" />
+        <button @click="nextImage" class="nav-button">▶</button>
+      </div>
+    </div>
+
     <div class="infographics-container">
       <img
-        src="/tips1.png"
-        alt="Tips for Caregivers' Well-being"
+        v-for="(img, index) in images"
+        :key="index"
+        :src="img"
         class="infographic"
-      />
-      <img
-        src="/tips2.png"
-        alt="Simple Hacks for Daily Care"
-        class="infographic"
-      />
-      <img
-        src="/tips3.png"
-        alt="Communication & Support for Caregivers"
-        class="infographic"
-      />
-      <img
-        src="/tips4.png"
-        alt="Dementia Care: What Caregivers Should Know"
-        class="infographic"
+        @click="openModal(index)"
       />
     </div>
 
@@ -60,6 +56,9 @@ const query = ref("");
 const results = ref([]);
 const loading = ref(false);
 const error = ref("");
+const showModal = ref(false);
+const images = ["/tips1.png", "/tips2.png", "/tips3.png", "/tips4.png"];
+const currentIndex = ref(0);
 
 async function search() {
   loading.value = true;
@@ -75,6 +74,23 @@ async function search() {
   } finally {
     loading.value = false;
   }
+}
+
+function openModal(index) {
+  currentIndex.value = index;
+  showModal.value = true;
+}
+
+function closeModal() {
+  showModal.value = false;
+}
+
+function nextImage() {
+  currentIndex.value = (currentIndex.value + 1) % images.length;
+}
+
+function prevImage() {
+  currentIndex.value = (currentIndex.value - 1 + images.length) % images.length;
 }
 </script>
 
@@ -117,6 +133,43 @@ async function search() {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
   object-fit: contain;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  gap: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-img {
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+  max-width: 90vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.nav-button {
+  cursor: pointer;
+  font-size: medium;
 }
 
 .search-container {

@@ -3,7 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import api from "./routes/api.js";
 import * as admin from "firebase-admin";
-import { initializeApp, applicationDefault } from "firebase-admin/app";
+import { initializeApp, cert } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";
 
 dotenv.config();
@@ -12,7 +12,7 @@ const app = express();
 
 if (!admin.apps?.length) {
   initializeApp({
-    credential: applicationDefault(),
+    credential: cert(JSON.parse(process.env.GOOGLE_CREDENTIALS)),
   });
 }
 

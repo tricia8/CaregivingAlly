@@ -1,6 +1,6 @@
 export const getResponses = async () => {
   try {
-    const res = await fetch(`/api/responses`);
+    const res = await fetch(`https://caregiving-ally.onrender.com/api/responses`);
 
     if (!res.ok) {
       throw new Error("Failed to fetch responses");
